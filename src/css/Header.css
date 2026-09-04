@@ -1,0 +1,242 @@
+/* Header.css */
+
+:root {
+  --header-bg: #000000;         /* cor sólida quando "tomar forma" no scroll */
+  --header-text: #ffffff;
+  --header-accent: #d62828;     /* cor de destaque (ajuste pro tom da marca) */
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  /* sempre transparente — só um gradiente sutil pra legibilidade do texto */
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  box-shadow: none;
+
+  transition: padding 0.3s ease;
+}
+
+/* estado "tomou forma": deixa de ser fixo e passa a rolar junto com a página.
+   sem fundo sólido, sem blur, sem borda — só a posição e o tamanho mudam.
+   top: 20px = mesmo valor do threshold usado no useEffect (window.scrollY > 20),
+   garante que não haja salto visual na troca de fixed -> absolute. */
+.header.scrolled {
+  position: absolute;
+  top: 20px;
+}
+
+/* menu mobile: sempre fixo enquanto aberto, pra não sumir da tela com o header absolute */
+.header.menu-open {
+  position: fixed;
+  top: 0;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px;
+  transition: padding 0.3s ease;
+}
+
+.header.scrolled .header-inner {
+  padding: 10px 32px;
+}
+
+/* LOGO */
+.logo img {
+  height: 60px;
+  transition: height 0.3s ease, filter 0.3s ease;
+}
+
+.header.scrolled .logo img {
+  height: 42px;
+}
+
+/* NAV DESKTOP */
+.nav-desktop {
+  display: flex;
+  gap: 32px;
+}
+
+.nav-desktop a {
+  color: var(--header-text);
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.nav-desktop a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: var(--header-accent);
+  transition: width 0.3s ease;
+}
+
+.nav-desktop a:hover::after,
+.nav-desktop a.active::after {
+  width: 100%;
+}
+
+/* HAMBÚRGUER */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.menu-toggle span {
+  width: 100%;
+  height: 2px;
+  background: var(--header-text);
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.menu-toggle.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.menu-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* MENU MOBILE OVERLAY */
+.nav-mobile {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.97);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  transform: translateX(100%);
+  transition: transform 0.4s ease;
+}
+
+.nav-mobile.open {
+  transform: translateX(0);
+}
+
+.nav-mobile a {
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+
+.nav-mobile a.active {
+  color: var(--header-accent);
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .nav-desktop {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  /* header mobile: fundo branco fixo, com linha sutil embaixo (sem o gradiente/absolute do desktop) */
+  .header,
+  .header.scrolled,
+  .header.menu-open {
+    position: fixed;
+    top: 0;
+    background: #ffffff;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+  }
+
+  /* container vira a referência de posicionamento pra logo ficar centralizada de verdade,
+     não importa a largura do hambúrguer nem se algo mais é adicionado do lado direito no futuro */
+  .header-inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 14px 20px;
+    min-height: 56px;
+  }
+
+  .header.scrolled .header-inner {
+    padding: 10px 20px;
+  }
+
+  /* hambúrguer fica no fluxo normal, à esquerda — menor que o tamanho padrão do desktop */
+  .menu-toggle {
+    position: relative;
+    z-index: 2;
+    width: 22px;
+    height: 22px;
+    gap: 4px;
+  }
+
+  .menu-toggle span {
+    background: #1a1a1a;
+    box-shadow: none;
+  }
+
+  /* quando o menu abre, o hambúrguer vira "X" em cima do overlay preto (.nav-mobile) —
+     precisa virar branco aqui, senão fica invisível sobre o fundo escuro */
+  .menu-toggle.open span {
+    background: #6c6a6a;
+  }
+
+  .menu-toggle.open span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  .menu-toggle.open span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* logo centralizada no header inteiro via absolute + translateX(-50%),
+     ignora completamente a largura do hambúrguer ao lado */
+  .logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+
+  .logo img {
+    height: 44px;
+    filter: none;
+  }
+
+  .header.scrolled .logo img {
+    height: 38px;
+  }
+}

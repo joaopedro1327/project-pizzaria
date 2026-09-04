@@ -1,0 +1,82 @@
+/* StoreStatus.css */
+
+/* ---- DESKTOP (padrão): escondida — só aparece em telas menores, junto com o menu-toggle ---- */
+.store-status {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.store-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff5c5c; /* vermelho = fechado */
+  flex-shrink: 0;
+}
+
+.store-status.open .store-status-dot {
+  background: #4fd869; /* verde = aberto */
+}
+
+.store-status-label {
+  font-weight: 700;
+  color: #ff8080;
+  white-space: nowrap;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.store-status.open .store-status-label {
+  color: #7ee08a;
+}
+
+.store-status-sep {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.store-status-message {
+  color: rgba(255, 255, 255, 0.9);
+  white-space: nowrap;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* ---- MOBILE: barra branca sólida, full width, largada abaixo do header-inner ---- */
+@media (max-width: 768px) {
+  .store-status {
+    display: flex;
+    width: 100%;
+    margin: 0;
+    padding: 7px 16px;
+    border-radius: 0;
+    background: #ffffff;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .store-status-label {
+    color: #d62828;
+    text-shadow: none;
+  }
+
+  .store-status.open .store-status-label {
+    color: #2e7d32;
+  }
+
+  .store-status-sep {
+    color: #b0b0b0;
+  }
+
+  .store-status-message {
+    color: #555555;
+    text-shadow: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .store-status {
+    font-size: 0.78rem;
+    gap: 6px;
+  }
+}
