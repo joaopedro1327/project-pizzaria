@@ -140,7 +140,7 @@ export default function Home() {
             <div className="premium-block">
               <div className="premium-block-title">
                 <FaRegClock />
-                <h4>Horário</h4>
+                <h4>Horário de Funcionamento</h4>
               </div>
               <ul className="hours-premium">
                 {WEEK_SCHEDULE.map((day) => (
