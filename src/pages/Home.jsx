@@ -1,4 +1,5 @@
 import "../css/Home.css";
+import { Link } from "react-router-dom";
 import {
   FaUtensils,
   FaMotorcycle,
@@ -53,7 +54,7 @@ export default function Home() {
       <section className="hero">
         <div className="hero-grid container">
           <div className="hero-content">
-            <span className="hero-badge">⭐5/5 avaliações no Google</span>
+            <span className="hero-badge">⭐⭐⭐⭐⭐5/5 no Google</span>
 
             <h1>
               Pizzaria Rafaela
@@ -83,9 +84,9 @@ export default function Home() {
             </div>
 
             <div className="hero-actions">
-              <a href="/Menu" className="btn-primary">
+              <Link to="/Menu" className="btn-primary">
                 Ver Cardápio
-              </a>
+              </Link>
 
               <a
                 href="https://wa.me/5512996090978"

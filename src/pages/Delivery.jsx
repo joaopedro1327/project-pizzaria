@@ -26,9 +26,9 @@ export default function Delivery() {
           </div>
 
           <div className="delivery-actions">
-            <a href="/Menu" className="btn-primary">
+            <Link to="/Menu" className="btn-primary">
               Ver Cardápio
-            </a>
+            </Link>
             <a
               href="https://wa.me/5512996090978"
               target="_blank"
