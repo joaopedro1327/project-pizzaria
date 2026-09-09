@@ -1,4 +1,5 @@
 import "../css/Delivery.css";
+import { Link } from "react-router-dom";
 
 export default function Delivery() {
   return (
@@ -27,10 +28,10 @@ export default function Delivery() {
 
           <div className="delivery-actions">
             <Link to="/Menu" className="btn-primary">
-              Ver Cardápio
+                Ver Cardápio
             </Link>
             <a
-              href="https://wa.me/5512996090978"
+              href="https://wa.me/12996090978"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary"

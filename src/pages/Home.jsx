@@ -54,8 +54,6 @@ export default function Home() {
       <section className="hero">
         <div className="hero-grid container">
           <div className="hero-content">
-            <span className="hero-badge">⭐⭐⭐⭐⭐5/5 no Google</span>
-
             <h1>
               Pizzaria Rafaela
             </h1>
